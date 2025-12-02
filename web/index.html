@@ -4,16 +4,217 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpenDEX - Personal Finance Tracker</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="app-container">
-        <!-- Your content will go here -->
-        <h1>Welcome to SpenDEX</h1>
-        <p>Personal Finance Tracker</p>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <h1>SpenDEX</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="nav-item">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="budget.html" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Budget</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="calendar.html" class="nav-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="username">User Name</span>
+                    <span class="user-email">user@example.com</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search...">
+                </div>
+                <div class="top-bar-actions">
+                    <button class="btn btn-primary" id="addTransactionBtn">
+                        <i class="fas fa-plus"></i> Add Transaction
+                    </button>
+                    <div class="notifications">
+                        <i class="far fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="content-area">
+                <h2>Dashboard</h2>
+                
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="card">
+                        <div class="card-icon" style="background-color: #EFF6FF;">
+                            <i class="fas fa-wallet" style="color: #3B82F6;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Total Balance</span>
+                            <h3 class="card-value">$12,450.00</h3>
+                            <span class="card-change positive">+2.4% from last month</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon" style="background-color: #ECFDF5;">
+                            <i class="fas fa-arrow-down" style="color: #10B981;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Income</span>
+                            <h3 class="card-value">$5,200.00</h3>
+                            <span class="card-change positive">+1.2% from last month</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon" style="background-color: #FEF2F2;">
+                            <i class="fas fa-arrow-up" style="color: #EF4444;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Expenses</span>
+                            <h3 class="card-value">$2,750.00</h3>
+                            <span class="card-change negative">-0.8% from last month</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon" style="background-color: #F5F3FF;">
+                            <i class="fas fa-bullseye" style="color: #8B5CF6;"></i>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Savings Goal</span>
+                            <h3 class="card-value">$1,500.00</h3>
+                            <span class="card-change">75% of target</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="charts-row">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Spending Overview</h3>
+                            <select class="chart-period">
+                                <option>This Month</option>
+                                <option>Last Month</option>
+                                <option>Last 6 Months</option>
+                                <option>This Year</option>
+                            </select>
+                        </div>
+                        <canvas id="spendingChart"></canvas>
+                    </div>
+                    <div class="chart-container pie-chart">
+                        <div class="chart-header">
+                            <h3>Spending by Category</h3>
+                        </div>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="recent-transactions">
+                    <div class="section-header">
+                        <h3>Recent Transactions</h3>
+                        <a href="transactions.html" class="view-all">View All</a>
+                    </div>
+                    <div class="transactions-list">
+                        <!-- Transaction items will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
+
+    <!-- Add Transaction Modal -->
+    <div class="modal" id="addTransactionModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Transaction</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="transactionForm">
+                    <div class="form-group">
+                        <label for="transactionType">Type</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="transactionType" value="expense" checked>
+                                <span>Expense</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="transactionType" value="income">
+                                <span>Income</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <div class="input-with-icon">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="amount" placeholder="0.00" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="">Select a category</option>
+                            <option value="food">Food</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="bills">Bills</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description (Optional)</label>
+                        <textarea id="description" rows="2" placeholder="Add a note"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelTransaction">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Transaction</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - SpenDEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .fc .fc-button-primary {
+            background-color: #7C3AED;
+            border-color: #7C3AED;
+        }
+        .fc .fc-button-active {
+            background-color: #6D28D9;
+            border-color: #6D28D9;
+        }
+        .fc-event {
+            background-color: #7C3AED;
+            border: none;
+            padding: 2px 5px;
+            font-size: 0.85em;
+            border-radius: 4px;
+        }
+        .fc-daygrid-dot-event .fc-event-title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <h1>SpenDEX</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="nav-item">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="budget.html" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Budget</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="calendar.html" class="nav-item active">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="username">User Name</span>
+                    <span class="user-email">user@example.com</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="calendar-actions">
+                    <button class="btn btn-primary" id="addEventBtn">
+                        <i class="fas fa-plus"></i> Add Event
+                    </button>
+                    <button class="btn btn-secondary" id="todayBtn">
+                        Today
+                    </button>
+                </div>
+                <div class="view-options">
+                    <button class="btn btn-icon" id="prevPeriod">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <h2 id="currentDateRange">December 2025</h2>
+                    <button class="btn btn-icon" id="nextPeriod">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="view-type">
+                    <button class="btn btn-text view-type-btn active" data-view="dayGridMonth">Month</button>
+                    <button class="btn btn-text view-type-btn" data-view="timeGridWeek">Week</button>
+                    <button class="btn btn-text view-type-btn" data-view="timeGridDay">Day</button>
+                    <button class="btn btn-text view-type-btn" data-view="listMonth">List</button>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <div id="calendar"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Event Modal -->
+    <div class="modal" id="eventModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="eventModalTitle">Add Event</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <input type="hidden" id="eventId">
+                    <div class="form-group">
+                        <label for="eventTitle">Title</label>
+                        <input type="text" id="eventTitle" placeholder="Event title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventType">Event Type</label>
+                        <select id="eventType" required>
+                            <option value="">Select event type</option>
+                            <option value="bill">Bill Payment</option>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                            <option value="reminder">Reminder</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="eventStartDate">Start Date</label>
+                            <input type="datetime-local" id="eventStartDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="eventEndDate">End Date</label>
+                            <input type="datetime-local" id="eventEndDate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventAmount">Amount (optional)</label>
+                        <div class="input-with-icon">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="eventAmount" placeholder="0.00" step="0.01">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventCategory">Category (optional)</label>
+                        <select id="eventCategory">
+                            <option value="">Select a category</option>
+                            <option value="food">Food & Dining</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="bills">Bills</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventDescription">Description (optional)</label>
+                        <textarea id="eventDescription" rows="3" placeholder="Add event details"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelEvent">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="deleteEvent" style="display: none;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                        <button type="submit" class="btn btn-primary">Save Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div class="modal" id="eventDetailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h3 id="eventDetailsTitle">Event Title</h3>
+                    <p id="eventDetailsDate" class="event-meta"></p>
+                </div>
+                <div class="event-actions">
+                    <button class="btn btn-icon" id="editEventBtn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-icon" id="closeEventDetails">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="event-details">
+                    <div class="event-detail" id="eventDetailsAmount">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="event-detail" id="eventDetailsCategory">
+                        <i class="fas fa-tag"></i>
+                        <span>No category</span>
+                    </div>
+                    <div class="event-detail" id="eventDetailsDescription">
+                        <i class="fas fa-align-left"></i>
+                        <p>No description provided.</p>
+                    </div>
+                </div>
+                <div class="event-actions-bottom">
+                    <button class="btn btn-secondary" id="markAsPaidBtn">
+                        <i class="fas fa-check-circle"></i> Mark as Paid
+                    </button>
+                    <button class="btn btn-danger" id="deleteEventBtn">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget - SpenDEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <h1>SpenDEX</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="nav-item">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="budget.html" class="nav-item active">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Budget</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="calendar.html" class="nav-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="username">User Name</span>
+                    <span class="user-email">user@example.com</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search categories...">
+                </div>
+                <div class="top-bar-actions">
+                    <button class="btn btn-primary" id="addBudgetBtn">
+                        <i class="fas fa-plus"></i> Add Budget
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <div class="page-header">
+                    <h2>Budget Overview</h2>
+                    <div class="budget-period-selector">
+                        <button class="btn btn-icon"><i class="fas fa-chevron-left"></i></button>
+                        <h3>December 2025</h3>
+                        <button class="btn btn-icon"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+
+                <!-- Budget Summary -->
+                <div class="budget-summary">
+                    <div class="budget-summary-card">
+                        <div class="budget-summary-icon" style="background-color: #EFF6FF;">
+                            <i class="fas fa-wallet" style="color: #3B82F6;"></i>
+                        </div>
+                        <div class="budget-summary-details">
+                            <span class="budget-summary-label">Total Budget</span>
+                            <h3>$3,000.00</h3>
+                            <div class="budget-summary-progress">
+                                <div class="progress-bar" style="width: 65%;"></div>
+                            </div>
+                            <div class="budget-summary-meta">
+                                <span>$1,950.00 spent</span>
+                                <span>$1,050.00 remaining</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="budget-summary-card">
+                        <div class="budget-summary-icon" style="background-color: #ECFDF5;">
+                            <i class="fas fa-arrow-down" style="color: #10B981;"></i>
+                        </div>
+                        <div class="budget-summary-details">
+                            <span class="budget-summary-label">Monthly Income</span>
+                            <h3>$5,200.00</h3>
+                            <div class="budget-summary-meta">
+                                <span>Next income: Jan 1, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="budget-summary-card">
+                        <div class="budget-summary-icon" style="background-color: #FEF2F2;">
+                            <i class="fas fa-piggy-bank" style="color: #EF4444;"></i>
+                        </div>
+                        <div class="budget-summary-details">
+                            <span class="budget-summary-label">Monthly Savings</span>
+                            <h3>$1,200.00</h3>
+                            <div class="budget-summary-progress">
+                                <div class="progress-bar" style="width: 75%; background-color: #10B981;"></div>
+                            </div>
+                            <div class="budget-summary-meta">
+                                <span>$900.00 saved</span>
+                                <span>$300.00 to go</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Categories -->
+                <div class="budget-categories">
+                    <div class="section-header">
+                        <h3>Budget Categories</h3>
+                        <div class="view-options">
+                            <button class="btn btn-text active">All</button>
+                            <button class="btn btn-text">Overspent</button>
+                            <button class="btn btn-text">On Track</button>
+                        </div>
+                    </div>
+                    
+                    <div class="budget-category">
+                        <div class="budget-category-header">
+                            <div class="budget-category-info">
+                                <div class="category-icon" style="background-color: #FEE2E2;">
+                                    <i class="fas fa-utensils" style="color: #DC2626;"></i>
+                                </div>
+                                <div>
+                                    <h4>Food & Dining</h4>
+                                    <div class="budget-category-meta">
+                                        <span class="budget-amount">$600.00</span>
+                                        <span class="budget-spent">$450.00 spent</span>
+                                        <span class="budget-remaining">$150.00 remaining</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="budget-category-actions">
+                                <div class="budget-progress-bar">
+                                    <div class="progress-fill" style="width: 75%; background-color: #10B981;"></div>
+                                </div>
+                                <button class="btn btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="budget-category">
+                        <div class="budget-category-header">
+                            <div class="budget-category-info">
+                                <div class="category-icon" style="background-color: #FEF3C7;">
+                                    <i class="fas fa-shopping-cart" style="color: #D97706;"></i>
+                                </div>
+                                <div>
+                                    <h4>Shopping</h4>
+                                    <div class="budget-category-meta">
+                                        <span class="budget-amount">$400.00</span>
+                                        <span class="budget-spent">$350.00 spent</span>
+                                        <span class="budget-remaining">$50.00 remaining</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="budget-category-actions">
+                                <div class="budget-progress-bar">
+                                    <div class="progress-fill warning" style="width: 87%;"></div>
+                                </div>
+                                <button class="btn btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="budget-category">
+                        <div class="budget-category-header">
+                            <div class="budget-category-info">
+                                <div class="category-icon" style="background-color: #E0E7FF;">
+                                    <i class="fas fa-car" style="color: #4F46E5;"></i>
+                                </div>
+                                <div>
+                                    <h4>Transportation</h4>
+                                    <div class="budget-category-meta">
+                                        <span class="budget-amount">$300.00</span>
+                                        <span class="budget-spent">$200.00 spent</span>
+                                        <span class="budget-remaining">$100.00 remaining</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="budget-category-actions">
+                                <div class="budget-progress-bar">
+                                    <div class="progress-fill" style="width: 66%; background-color: #10B981;"></div>
+                                </div>
+                                <button class="btn btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="budget-category">
+                        <div class="budget-category-header">
+                            <div class="budget-category-info">
+                                <div class="category-icon" style="background-color: #E0F2FE;">
+                                    <i class="fas fa-home" style="color: #0EA5E9;"></i>
+                                </div>
+                                <div>
+                                    <h4>Housing</h4>
+                                    <div class="budget-category-meta">
+                                        <span class="budget-amount">$1,200.00</span>
+                                        <span class="budget-spent">$1,200.00 spent</span>
+                                        <span class="budget-remaining">$0.00 remaining</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="budget-category-actions">
+                                <div class="budget-progress-bar">
+                                    <div class="progress-fill danger" style="width: 100%;"></div>
+                                </div>
+                                <button class="btn btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="budget-category">
+                        <div class="budget-category-header">
+                            <div class="budget-category-info">
+                                <div class="category-icon" style="background-color: #F3E8FF;">
+                                    <i class="fas fa-gamepad" style="color: #9333EA;"></i>
+                                </div>
+                                <div>
+                                    <h4>Entertainment</h4>
+                                    <div class="budget-category-meta">
+                                        <span class="budget-amount">$200.00</span>
+                                        <span class="budget-spent">$50.00 spent</span>
+                                        <span class="budget-remaining">$150.00 remaining</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="budget-category-actions">
+                                <div class="budget-progress-bar">
+                                    <div class="progress-fill" style="width: 25%; background-color: #10B981;"></div>
+                                </div>
+                                <button class="btn btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Charts -->
+                <div class="budget-charts">
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Spending by Category</h3>
+                            <select class="chart-period">
+                                <option>This Month</option>
+                                <option>Last Month</option>
+                                <option>Last 6 Months</option>
+                            </select>
+                        </div>
+                        <canvas id="categorySpendingChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <h3>Budget vs Actual</h3>
+                        </div>
+                        <canvas id="budgetVsActualChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add/Edit Budget Modal -->
+    <div class="modal" id="budgetModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="budgetModalTitle">Add Budget Category</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="budgetForm">
+                    <div class="form-group">
+                        <label for="budgetCategory">Category</label>
+                        <select id="budgetCategory" required>
+                            <option value="">Select a category</option>
+                            <option value="food">Food & Dining</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="housing">Housing</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="health">Health & Fitness</option>
+                            <option value="education">Education</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budgetAmount">Monthly Budget</label>
+                        <div class="input-with-icon">
+                            <span class="input-prefix">$</span>
+                            <input type="number" id="budgetAmount" placeholder="0.00" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="budgetColor">Color</label>
+                        <div class="color-picker">
+                            <input type="color" id="budgetColor" value="#3B82F6">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelBudget">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Budget</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/budget.js"></script>
+</body>
+</html>

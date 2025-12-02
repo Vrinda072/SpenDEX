@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - SpenDEX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datepicker/dist/datepicker.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <h1>SpenDEX</h1>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="transactions.html" class="nav-item">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="budget.html" class="nav-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Budget</span>
+                </a>
+                <a href="analytics.html" class="nav-item active">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="calendar.html" class="nav-item">
+                    <i class="far fa-calendar-alt"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="username">User Name</span>
+                    <span class="user-email">user@example.com</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="date-range-picker">
+                    <button class="btn btn-icon" id="prevPeriod"><i class="fas fa-chevron-left"></i></button>
+                    <div class="date-range-display" id="dateRangeDisplay">Dec 1 - Dec 31, 2025</div>
+                    <button class="btn btn-icon" id="nextPeriod"><i class="fas fa-chevron-right"></i></button>
+                    <button class="btn btn-text" id="selectDateRange">
+                        <i class="far fa-calendar-alt"></i> Select Date Range
+                    </button>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="btn btn-secondary" id="exportReportBtn">
+                        <i class="fas fa-file-export"></i> Export Report
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-area">
+                <div class="page-header">
+                    <h2>Analytics</h2>
+                    <div class="view-options">
+                        <button class="btn btn-tab active" data-tab="overview">Overview</button>
+                        <button class="btn btn-tab" data-tab="categories">Categories</button>
+                        <button class="btn btn-tab" data-tab="trends">Trends</button>
+                        <button class="btn btn-tab" data-tab="reports">Reports</button>
+                    </div>
+                </div>
+
+                <!-- Overview Tab -->
+                <div class="tab-content active" id="overviewTab">
+                    <div class="analytics-summary">
+                        <div class="analytics-summary-card">
+                            <div class="analytics-summary-icon" style="background-color: #ECFDF5;">
+                                <i class="fas fa-arrow-down" style="color: #10B981;"></i>
+                            </div>
+                            <div class="analytics-summary-details">
+                                <span class="analytics-summary-label">Total Income</span>
+                                <h3>$5,200.00</h3>
+                                <span class="analytics-summary-change positive">+12.5% from last month</span>
+                            </div>
+                        </div>
+                        <div class="analytics-summary-card">
+                            <div class="analytics-summary-icon" style="background-color: #FEF2F2;">
+                                <i class="fas fa-arrow-up" style="color: #EF4444;"></i>
+                            </div>
+                            <div class="analytics-summary-details">
+                                <span class="analytics-summary-label">Total Expenses</span>
+                                <h3>$2,750.00</h3>
+                                <span class="analytics-summary-change negative">+5.2% from last month</span>
+                            </div>
+                        </div>
+                        <div class="analytics-summary-card">
+                            <div class="analytics-summary-icon" style="background-color: #EFF6FF;">
+                                <i class="fas fa-piggy-bank" style="color: #3B82F6;"></i>
+                            </div>
+                            <div class="analytics-summary-details">
+                                <span class="analytics-summary-label">Savings Rate</span>
+                                <h3>47.1%</h3>
+                                <span class="analytics-summary-change positive">+3.8% from last month</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-charts-row">
+                        <div class="chart-container full-width">
+                            <div class="chart-header">
+                                <h3>Income vs Expenses</h3>
+                                <select class="chart-period" id="incomeExpensePeriod">
+                                    <option value="monthly">Monthly</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+                            <canvas id="incomeExpenseChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-charts-row">
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>Spending by Category</h3>
+                            </div>
+                            <canvas id="spendingByCategoryChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <h3>Income Sources</h3>
+                            </div>
+                            <canvas id="incomeSourcesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Tab -->
+                <div class="tab-content" id="categoriesTab">
+                    <div class="categories-grid">
+                        <div class="category-card">
+                            <div class="category-header" style="background-color: #FEE2E2;">
+                                <i class="fas fa-utensils" style="color: #DC2626;"></i>
+                                <h4>Food & Dining</h4>
+                            </div>
+                            <div class="category-details">
+                                <div class="category-amount">$450.00</div>
+                                <div class="category-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%; background-color: #DC2626;"></div>
+                                    </div>
+                                    <span>75% of budget</span>
+                                </div>
+                                <div class="category-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Monthly Avg.</span>
+                                        <span class="stat-value">$380.00</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">vs Last Month</span>
+                                        <span class="stat-value positive">+12%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="category-card">
+                            <div class="category-header" style="background-color: #FEF3C7;">
+                                <i class="fas fa-shopping-cart" style="color: #D97706;"></i>
+                                <h4>Shopping</h4>
+                            </div>
+                            <div class="category-details">
+                                <div class="category-amount">$350.00</div>
+                                <div class="category-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill warning" style="width: 87%;"></div>
+                                    </div>
+                                    <span>87% of budget</span>
+                                </div>
+                                <div class="category-stats">
+                                    <div class="stat">
+                                        <span class="stat-label">Monthly Avg.</span>
+                                        <span class="stat-value">$420.00</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-label">vs Last Month</span>
+                                        <span class="stat-value negative">-17%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- More category cards would go here -->
+                        
+                    </div>
+                </div>
+
+                <!-- Trends Tab -->
+                <div class="tab-content" id="trendsTab">
+                    <div class="trends-filters">
+                        <div class="filter-group">
+                            <label for="trendCategory">Category</label>
+                            <select id="trendCategory">
+                                <option value="all">All Categories</option>
+                                <option value="food">Food & Dining</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="housing">Housing</option>
+                                <option value="entertainment">Entertainment</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="trendPeriod">Time Period</label>
+                            <select id="trendPeriod">
+                                <option value="6">Last 6 Months</option>
+                                <option value="12" selected>Last 12 Months</option>
+                                <option value="24">Last 2 Years</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" id="applyTrendFilters">Apply Filters</button>
+                    </div>
+
+                    <div class="chart-container full-width">
+                        <div class="chart-header">
+                            <h3>Spending Trends</h3>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #3B82F6;"></span>
+                                    <span>This Year</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #E5E7EB;"></span>
+                                    <span>Last Year</span>
+                                </div>
+                            </div>
+                        </div>
+                        <canvas id="spendingTrendsChart"></canvas>
+                    </div>
+
+                    <div class="trends-comparison">
+                        <div class="comparison-card">
+                            <h4>Biggest Increase</h4>
+                            <div class="comparison-details">
+                                <div class="comparison-category">
+                                    <i class="fas fa-utensils" style="color: #DC2626;"></i>
+                                    <span>Food & Dining</span>
+                                </div>
+                                <div class="comparison-amount positive">+$120.00</div>
+                                <div class="comparison-percent positive">+36%</div>
+                            </div>
+                        </div>
+                        <div class="comparison-card">
+                            <h4>Biggest Decrease</h4>
+                            <div class="comparison-details">
+                                <div class="comparison-category">
+                                    <i class="fas fa-shopping-cart" style="color: #D97706;"></i>
+                                    <span>Shopping</span>
+                                </div>
+                                <div class="comparison-amount negative">-$85.00</div>
+                                <div class="comparison-percent negative">-12%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Tab -->
+                <div class="tab-content" id="reportsTab">
+                    <div class="reports-header">
+                        <h3>Generated Reports</h3>
+                        <button class="btn btn-primary" id="generateReportBtn">
+                            <i class="fas fa-plus"></i> Generate New Report
+                        </button>
+                    </div>
+                    
+                    <div class="reports-grid">
+                        <div class="report-card">
+                            <div class="report-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <div class="report-details">
+                                <h4>Monthly Summary - November 2025</h4>
+                                <p>Generated on Dec 2, 2025</p>
+                                <div class="report-actions">
+                                    <button class="btn btn-text"><i class="fas fa-download"></i> Download</button>
+                                    <button class="btn btn-text"><i class="fas fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-icon">
+                                <i class="fas fa-file-excel"></i>
+                            </div>
+                            <div class="report-details">
+                                <h4>Annual Report - 2025</h4>
+                                <p>Generated on Nov 1, 2025</p>
+                                <div class="report-actions">
+                                    <button class="btn btn-text"><i class="fas fa-download"></i> Download</button>
+                                    <button class="btn btn-text"><i class="fas fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="report-card">
+                            <div class="report-icon">
+                                <i class="fas fa-file-csv"></i>
+                            </div>
+                            <div class="report-details">
+                                <h4>Expense Export - Q3 2025</h4>
+                                <p>Generated on Oct 5, 2025</p>
+                                <div class="report-actions">
+                                    <button class="btn btn-text"><i class="fas fa-download"></i> Download</button>
+                                    <button class="btn btn-text"><i class="fas fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="report-templates">
+                        <h4>Report Templates</h4>
+                        <div class="templates-grid">
+                            <div class="template-card">
+                                <div class="template-icon">
+                                    <i class="fas fa-calendar-week"></i>
+                                </div>
+                                <h5>Monthly Summary</h5>
+                                <p>Overview of income, expenses, and savings for a specific month.</p>
+                                <button class="btn btn-outline">Use Template</button>
+                            </div>
+                            <div class="template-card">
+                                <div class="template-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h5>Annual Report</h5>
+                                <p>Comprehensive yearly financial summary with trends and insights.</p>
+                                <button class="btn btn-outline">Use Template</button>
+                            </div>
+                            <div class="template-card">
+                                <div class="template-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <h5>Category Analysis</h5>
+                                <p>Detailed breakdown of spending by category over time.</p>
+                                <button class="btn btn-outline">Use Template</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Date Range Picker Modal -->
+    <div class="modal" id="dateRangeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Select Date Range</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="date-picker-container">
+                    <div id="dateRangePicker"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelDateRange">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="applyDateRange">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Report Modal -->
+    <div class="modal" id="generateReportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Generate New Report</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label for="reportTemplate">Report Template</label>
+                        <select id="reportTemplate" required>
+                            <option value="">Select a template</option>
+                            <option value="monthly_summary">Monthly Summary</option>
+                            <option value="annual_report">Annual Report</option>
+                            <option value="category_analysis">Category Analysis</option>
+                            <option value="custom">Custom Report</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="reportName">Report Name</label>
+                        <input type="text" id="reportName" placeholder="e.g., Q1 2025 Financial Report" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date Range</label>
+                        <div class="date-range-group">
+                            <input type="date" id="reportStartDate" required>
+                            <span>to</span>
+                            <input type="date" id="reportEndDate" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Format</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="reportFormat" value="pdf" checked>
+                                <span>PDF</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reportFormat" value="excel">
+                                <span>Excel</span>
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="reportFormat" value="csv">
+                                <span>CSV</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelReport">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Generate Report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datepicker/dist/datepicker.min.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+</html>
