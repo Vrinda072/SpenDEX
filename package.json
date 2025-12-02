@@ -1,0 +1,23 @@
+{
+  "name": "spendex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node web/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vrinda072/SpenDEX.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vrinda072/SpenDEX/issues"
+  },
+  "homepage": "https://github.com/Vrinda072/SpenDEX#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
