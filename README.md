@@ -1,52 +1,60 @@
-# SpenDEX - Budget Management System
+# SpendEX — Smart Calendar Finance Assistant
 
-Pure Java web application for tracking expenses and managing budgets. **Zero external dependencies.**
+A pure Java Swing desktop application for personal budget management with automatic daily budget adjustment based on upcoming events.
 
 ## Quick Start
 
 ```bash
-# Compile (pure Java)
-javac Build.java && java Build
-
-# Or run directly
-java -cp bin app.Main
+cd swing
+javac -d bin $(find src -type f -name "*.java")
+java -cp bin MainApp
 ```
 
 ## Features
 
-- ✅ Track income & expenses
-- ✅ Budget management by category  
-- ✅ Daily spending limits
-- ✅ Calendar event integration
-- ✅ Responsive web UI
-- ✅ In-memory data storage
+- ✅ **Add Expenses** - Track spending by category
+- ✅ **Add Income** - Record earnings
+- ✅ **Add Events** - Plan future costs with budget impact
+- ✅ **Adjusted Budget** - Daily limit auto-adjusts for upcoming events
+- ✅ **Summary Dashboard** - Complete spending breakdown & warnings
+- ✅ **Professional UI** - 5 pages with emoji headers, purple/black theme
+
+## Architecture
+
+**18 Java Classes** organized in packages:
+- `model/` - Expense, Income, Event, Goal
+- `manager/` - FinanceTracker, CalendarManager, CategoryManager
+- `logic/` - BudgetAdjuster, BudgetForecast, BudgetCalculable interface
+- `ui/` - HomePageUI, AddExpenseUI, AddIncomeUI, AddEventUI, SummaryUI
+- `exceptions/` - InvalidAmountException, InvalidDateException
+
+## Technical Details
+
+- **Technology**: Pure Java 8+ with Swing (zero dependencies)
+- **Currency**: AED (UAE Dirham)
+- **Design**: Full OOP with Encapsulation, Abstraction, Composition
+- **Data**: User-input only (no defaults or hardcoded values)
+- **Color Scheme**: Black #0D0D0D, Purple #6A0DAD, White #FFFFFF
 
 ## Project Structure
 
 ```
 SpenDEX/
-├── src/                     # Java source (14 files)
-│   ├── Main.java
-│   ├── managers/            # Business logic
-│   ├── model/               # Data models
-│   ├── services/            # Utilities
-│   └── web/                 # HTTP handlers
-├── web/                     # Frontend assets
-│   ├── *.html               # 6 HTML pages
-│   ├── css/
-│   └── js/
-├── bin/                     # Compiled output (auto-generated)
-├── compile.sh              # Build script
-├── start                   # Run script
-└── README.md               # This file
+├── swing/                   # Main Swing Application
+│   ├── src/                 # 18 Java classes
+│   │   ├── MainApp.java
+│   │   ├── model/           # Data models
+│   │   ├── manager/         # Business logic
+│   │   ├── logic/           # Calculations
+│   │   ├── ui/              # 5 GUI pages
+│   │   └── exceptions/      # Custom exceptions
+│   ├── bin/                 # Compiled classes (auto-generated)
+│   ├── build.sh            # Build script
+│   └── README.md           # Quick start guide
+├── src/                     # Legacy web app (optional)
+├── web/                     # Legacy web frontend (optional)
+└── compile.sh              # Legacy build script
 ```
-
-## API Endpoints
-
-**Transactions**
-- `GET /api/transactions` - Get all
-- `POST /api/transactions` - Add
-- `DELETE /api/transactions/{id}` - Delete
 
 **Budget**
 - `GET /api/budget` - Get info

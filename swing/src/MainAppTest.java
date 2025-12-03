@@ -24,8 +24,8 @@ public class MainAppTest {
             FinanceTracker financeTracker = new FinanceTracker();
             CalendarManager calendarManager = new CalendarManager();
             CategoryManager categoryManager = new CategoryManager();
-            BudgetAdjuster budgetAdjuster = new BudgetAdjuster(financeTracker, 5000); // 5000 AED monthly
-            BudgetForecast budgetForecast = new BudgetForecast(financeTracker, calendarManager);
+            BudgetAdjuster budgetAdjuster = new BudgetAdjuster(5000.0, financeTracker, calendarManager); // 5000 AED monthly
+            BudgetForecast budgetForecast = new BudgetForecast(financeTracker, calendarManager, budgetAdjuster);
 
             System.out.println("✅ All managers initialized successfully\n");
 

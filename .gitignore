@@ -22,12 +22,39 @@ Thumbs.db
 hs_err_pid*
 replay_pid*
 
-
 # Build directories
 target/
 build/
 bin/
 out/
+
+# Unnecessary documentation files
+CLEANUP_*.md
+DEPLOYMENT_GUIDE.md
+DOCUMENTATION_INDEX.md
+FILES_TO_REMOVE.txt
+FINAL_*.md
+GUI_*.md
+IMPROVEMENTS_*.md
+PYTHON_REMOVAL.md
+QUICK_REFERENCE.md
+README_FINAL.md
+VISUAL_IMPROVEMENTS_GUIDE.md
+WHAT_YOU_GOT.md
+YES_GUI_EXISTS.md
+YOUR_GUI_EXPLAINED.md
+PUSH_INSTRUCTIONS.md
+
+# Unnecessary scripts and files
+Build.java
+Build.class
+build.sh
+cleanup.sh
+run
+start
+test_compile.sh
+verify.sh
+VERSION
 dist/
 
 # IDE specific files
