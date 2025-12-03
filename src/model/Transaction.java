@@ -8,4 +8,5 @@ public interface Transaction {
     LocalDate getDate();
     Category getCategory();
     String getType();
+    String getId();
 }

@@ -62,9 +62,6 @@
                     <input type="text" placeholder="Search...">
                 </div>
                 <div class="top-bar-actions">
-                    <button class="btn btn-primary" id="addTransactionBtn">
-                        <i class="fas fa-plus"></i> Add Transaction
-                    </button>
                     <div class="notifications">
                         <i class="far fa-bell"></i>
                         <span class="badge">3</span>
@@ -83,9 +80,8 @@
                             <i class="fas fa-wallet" style="color: #3B82F6;"></i>
                         </div>
                         <div class="card-content">
-                            <span class="card-label">Total Balance</span>
-                            <h3 class="card-value">$12,450.00</h3>
-                            <span class="card-change positive">+2.4% from last month</span>
+                            <span class="card-label">Monthly Budget</span>
+                            <h3 class="card-value" id="budgetAmount">AED 5,000.00</h3>
                         </div>
                     </div>
                     <div class="card">
@@ -93,9 +89,8 @@
                             <i class="fas fa-arrow-down" style="color: #10B981;"></i>
                         </div>
                         <div class="card-content">
-                            <span class="card-label">Income</span>
-                            <h3 class="card-value">$5,200.00</h3>
-                            <span class="card-change positive">+1.2% from last month</span>
+                            <span class="card-label">Spent</span>
+                            <h3 class="card-value" id="spentAmount">AED 0.00</h3>
                         </div>
                     </div>
                     <div class="card">
@@ -103,9 +98,8 @@
                             <i class="fas fa-arrow-up" style="color: #EF4444;"></i>
                         </div>
                         <div class="card-content">
-                            <span class="card-label">Expenses</span>
-                            <h3 class="card-value">$2,750.00</h3>
-                            <span class="card-change negative">-0.8% from last month</span>
+                            <span class="card-label">Remaining</span>
+                            <h3 class="card-value" id="remainingAmount">AED 5,000.00</h3>
                         </div>
                     </div>
                     <div class="card">
@@ -113,9 +107,8 @@
                             <i class="fas fa-bullseye" style="color: #8B5CF6;"></i>
                         </div>
                         <div class="card-content">
-                            <span class="card-label">Savings Goal</span>
-                            <h3 class="card-value">$1,500.00</h3>
-                            <span class="card-change">75% of target</span>
+                            <span class="card-label">Daily Limit</span>
+                            <h3 class="card-value" id="dailyLimit">AED 166.67</h3>
                         </div>
                     </div>
                 </div>
@@ -133,12 +126,6 @@
                             </select>
                         </div>
                         <canvas id="spendingChart"></canvas>
-                    </div>
-                    <div class="chart-container pie-chart">
-                        <div class="chart-header">
-                            <h3>Spending by Category</h3>
-                        </div>
-                        <canvas id="categoryChart"></canvas>
                     </div>
                 </div>
 

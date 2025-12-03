@@ -1,8 +1,10 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Income implements Transaction {
+    private final String id;
     private final double amount;
     private final String title;
     private final LocalDate date;
@@ -12,6 +14,7 @@ public class Income implements Transaction {
         if (amount <= 0) {
             throw new IllegalArgumentException("Income amount must be positive");
         }
+        this.id = UUID.randomUUID().toString();
         this.amount = amount;
         this.title = title != null ? title : "";
         this.date = date != null ? date : LocalDate.now();
@@ -41,5 +44,10 @@ public class Income implements Transaction {
     @Override
     public String getType() {
         return "INCOME";
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }

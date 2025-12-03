@@ -1,0 +1,8 @@
+#!/bin/bash
+# Ultra-simple one-liner build and run
+set -e
+cd /workspaces/SpenDEX
+mkdir -p lib bin data
+[ -f lib/gson-2.10.1.jar ] || curl -L -o lib/gson-2.10.1.jar https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar 2>/dev/null
+find src -name "*.java" | xargs javac -d bin -cp ".:lib/*"
+java -cp "bin:lib/*" Main

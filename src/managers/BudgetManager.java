@@ -124,4 +124,36 @@ public class BudgetManager {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
+
+    public List<Transaction> getAllTransactions() {
+        return new ArrayList<>(transactions);
+    }
+
+    public List<Transaction> getExpenses() {
+        return transactions.stream()
+                .filter(t -> t.getType().equals("EXPENSE"))
+                .collect(Collectors.toList());
+    }
+
+    public List<Transaction> getIncomes() {
+        return transactions.stream()
+                .filter(t -> t.getType().equals("INCOME"))
+                .collect(Collectors.toList());
+    }
+
+    public List<Transaction> getTransactionsByMonth(int month, int year) {
+        return transactions.stream()
+                .filter(t -> t.getDate().getMonthValue() == month && t.getDate().getYear() == year)
+                .collect(Collectors.toList());
+    }
+
+    public List<Transaction> getTransactionsByCategory(Category category) {
+        return transactions.stream()
+                .filter(t -> t.getCategory() == category)
+                .collect(Collectors.toList());
+    }
+
+    public boolean removeTransaction(String id) {
+        return transactions.removeIf(t -> t.getId().equals(id));
+    }
 }

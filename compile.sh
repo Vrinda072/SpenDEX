@@ -3,12 +3,16 @@
 # Create necessary directories
 mkdir -p bin
 
-# Compile all Java files with Gson in the classpath
-find src -name "*.java" > sources.txt
-javac -d bin -cp ".:lib/*" @sources.txt
+# Compile all Java files (no external dependencies needed!)
+echo "Compiling SpenDEX Java project..."
+javac -d bin $(find src -type f -name "*.java")
 
-# Clean up
-rm sources.txt
-
-echo "Compilation complete. If no errors, you can run the application with:"
-echo "java -cp \"bin:lib/*\" Main"
+if [ $? -eq 0 ]; then
+    echo "✓ Compilation successful!"
+    echo ""
+    echo "To run the server:"
+    echo "  java -cp bin app.Main"
+else
+    echo "✗ Compilation failed!"
+    exit 1
+fi

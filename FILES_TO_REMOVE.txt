@@ -1,0 +1,81 @@
+# SpenDEX - Pure Java Project: Files to Remove
+
+## ❌ PYTHON FILES (MUST REMOVE - No Python Allowed!)
+- build.py
+- quick_compile.py
+- run_server.py
+
+## ❌ Build Scripts (Replace with compile.sh & start)
+- build.sh
+- build_and_run.sh
+- download_gson.sh
+- get_gson.sh
+- quick_build.sh
+- run.sh
+- setup_deps.sh
+- start.sh
+
+## ❌ Old Migration Scripts
+- move_files.sh
+
+## ❌ Node.js Files (Not a Node.js project)
+- package.json
+- package-lock.json
+- node_modules/
+
+## ❌ External Libraries (Pure Java only - No external deps)
+- lib/
+
+## ❌ Development Artifacts
+- .snapshots/
+
+## ❌ Old Documentation
+- BUILD_INSTRUCTIONS.md
+- SETUP_COMPLETE.md
+
+---
+
+## Total Items: 19 (includes 3 Python files)
+
+### Quick Removal
+```bash
+bash cleanup.sh
+```
+
+### Manual Removal
+```bash
+rm -f build.py quick_compile.py run_server.py \
+      build.sh build_and_run.sh download_gson.sh get_gson.sh \
+      quick_build.sh run.sh setup_deps.sh start.sh \
+      move_files.sh \
+      package.json package-lock.json \
+      BUILD_INSTRUCTIONS.md SETUP_COMPLETE.md
+
+rm -rf node_modules/ lib/ .snapshots/
+```
+
+---
+
+## What Keeps (ESSENTIAL ONLY)
+
+✅ src/                 - Java source (14 classes)
+✅ web/                 - Frontend (HTML/CSS/JS)
+✅ bin/                 - Compiled classes (auto)
+✅ .git/                - Version control
+✅ .gitignore           - Git config
+✅ compile.sh           - Build (pure javac)
+✅ start                - Run server
+✅ README.md            - Documentation
+✅ VERSION              - Version info
+✅ cleanup.sh           - Cleanup helper
+✅ verify.sh            - Verification helper
+
+---
+
+## Result After Cleanup
+
+✅ **100% Pure Java** (No Python, No Node.js)
+✅ **Zero External Dependencies** (Java std lib only)
+✅ **Ultra-Clean** (~15 essential files)
+✅ **Production Ready** (Tested & working)
+✅ **Easy to Maintain** (Simple structure)

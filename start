@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# SpenDEX Build and Run Script
+# Pure Java implementation - no external dependencies needed
+#
+
+set -e
+
+cd /workspaces/SpenDEX
+
+echo "╔════════════════════════════════════════╗"
+echo "║         SpenDEX - Pure Java             ║"
+echo "║       Budget Management System          ║"
+echo "╚════════════════════════════════════════╝"
+echo ""
+
+# Step 1: Create directories
+echo "[1/2] Preparing build environment..."
+mkdir -p bin
+
+# Step 2: Compile
+echo "[2/2] Compiling Java source code..."
+JAVA_FILES=$(find src -type f -name "*.java" | wc -l)
+echo "  Compiling $JAVA_FILES Java files..."
+
+if javac -d bin $(find src -type f -name "*.java"); then
+    echo "  ✓ Compilation successful"
+else
+    echo "  ✗ Compilation failed"
+    exit 1
+fi
+
+echo ""
+echo "╔════════════════════════════════════════╗"
+echo "║        Build Complete & Ready!         ║"
+echo "╠════════════════════════════════════════╣"
+echo "║  Starting SpenDEX Web Server...        ║"
+echo "╚════════════════════════════════════════╝"
+echo ""
+
+# Step 3: Run
+java -cp bin app.Main

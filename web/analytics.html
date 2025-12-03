@@ -93,8 +93,7 @@
                             </div>
                             <div class="analytics-summary-details">
                                 <span class="analytics-summary-label">Total Income</span>
-                                <h3>$5,200.00</h3>
-                                <span class="analytics-summary-change positive">+12.5% from last month</span>
+                                <h3 id="analyticsIncome">AED 0.00</h3>
                             </div>
                         </div>
                         <div class="analytics-summary-card">
@@ -103,8 +102,7 @@
                             </div>
                             <div class="analytics-summary-details">
                                 <span class="analytics-summary-label">Total Expenses</span>
-                                <h3>$2,750.00</h3>
-                                <span class="analytics-summary-change negative">+5.2% from last month</span>
+                                <h3 id="analyticsExpenses">AED 0.00</h3>
                             </div>
                         </div>
                         <div class="analytics-summary-card">
@@ -112,9 +110,8 @@
                                 <i class="fas fa-piggy-bank" style="color: #3B82F6;"></i>
                             </div>
                             <div class="analytics-summary-details">
-                                <span class="analytics-summary-label">Savings Rate</span>
-                                <h3>47.1%</h3>
-                                <span class="analytics-summary-change positive">+3.8% from last month</span>
+                                <span class="analytics-summary-label">Net Savings</span>
+                                <h3 id="analyticsNetSavings">AED 0.00</h3>
                             </div>
                         </div>
                     </div>
@@ -151,61 +148,8 @@
 
                 <!-- Categories Tab -->
                 <div class="tab-content" id="categoriesTab">
-                    <div class="categories-grid">
-                        <div class="category-card">
-                            <div class="category-header" style="background-color: #FEE2E2;">
-                                <i class="fas fa-utensils" style="color: #DC2626;"></i>
-                                <h4>Food & Dining</h4>
-                            </div>
-                            <div class="category-details">
-                                <div class="category-amount">$450.00</div>
-                                <div class="category-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 75%; background-color: #DC2626;"></div>
-                                    </div>
-                                    <span>75% of budget</span>
-                                </div>
-                                <div class="category-stats">
-                                    <div class="stat">
-                                        <span class="stat-label">Monthly Avg.</span>
-                                        <span class="stat-value">$380.00</span>
-                                    </div>
-                                    <div class="stat">
-                                        <span class="stat-label">vs Last Month</span>
-                                        <span class="stat-value positive">+12%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="category-card">
-                            <div class="category-header" style="background-color: #FEF3C7;">
-                                <i class="fas fa-shopping-cart" style="color: #D97706;"></i>
-                                <h4>Shopping</h4>
-                            </div>
-                            <div class="category-details">
-                                <div class="category-amount">$350.00</div>
-                                <div class="category-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill warning" style="width: 87%;"></div>
-                                    </div>
-                                    <span>87% of budget</span>
-                                </div>
-                                <div class="category-stats">
-                                    <div class="stat">
-                                        <span class="stat-label">Monthly Avg.</span>
-                                        <span class="stat-value">$420.00</span>
-                                    </div>
-                                    <div class="stat">
-                                        <span class="stat-label">vs Last Month</span>
-                                        <span class="stat-value negative">-17%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- More category cards would go here -->
-                        
+                    <div class="categories-grid" id="categoryCardsContainer">
+                        <!-- Category cards will be dynamically generated here -->
                     </div>
                 </div>
 
@@ -252,29 +196,8 @@
                         <canvas id="spendingTrendsChart"></canvas>
                     </div>
 
-                    <div class="trends-comparison">
-                        <div class="comparison-card">
-                            <h4>Biggest Increase</h4>
-                            <div class="comparison-details">
-                                <div class="comparison-category">
-                                    <i class="fas fa-utensils" style="color: #DC2626;"></i>
-                                    <span>Food & Dining</span>
-                                </div>
-                                <div class="comparison-amount positive">+$120.00</div>
-                                <div class="comparison-percent positive">+36%</div>
-                            </div>
-                        </div>
-                        <div class="comparison-card">
-                            <h4>Biggest Decrease</h4>
-                            <div class="comparison-details">
-                                <div class="comparison-category">
-                                    <i class="fas fa-shopping-cart" style="color: #D97706;"></i>
-                                    <span>Shopping</span>
-                                </div>
-                                <div class="comparison-amount negative">-$85.00</div>
-                                <div class="comparison-percent negative">-12%</div>
-                            </div>
-                        </div>
+                    <div class="trends-comparison" id="trendsComparison">
+                        <!-- Comparison cards will be dynamically generated -->
                     </div>
                 </div>
 
